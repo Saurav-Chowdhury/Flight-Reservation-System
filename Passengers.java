@@ -1,54 +1,65 @@
+import java.util.SimpleTimeZone;
+
 public class Passengers {
     private Address address;
     private Contact contact;
     private String user;
     private String password;
-    private Boolean login=false;
     private static int idCounter=1;
+    private int id;
     public int getPassengerCount(){
         return idCounter;
     }
-    Passengers(int id,String user,String password,Address address,Contact contact){
+    public String getContact(){
+        return "Name : "+contact.name+"\nPhone Number : "+contact.phoneNumber+"\nEmail : "+contact.email;
+    }
+    public void setContact(String name,String phoneNumber,String email){
+        contact.name=name;
+        contact.phoneNumber=phoneNumber;
+        contact.email=email;
+    }
+    public String getAddress(){
+
+        return "Street : "+address.street+"\nCity : "+address.city+"\nState : "+address.state;
+    }
+    public void setAddress(String street,String city, String state){
+        address.state=state;
+        address.street=street;
+        address.city=city;
+    }
+    //Passengers Constructor
+    Passengers(String user,String password,String street,String city,String state,String name,String email,String phoneNumber){
         this.user=user;
         this.password=password;
         id=idCounter++;
-        this.address=address;
-        this.contact=contact;
+        address=new Address(street, city, state);
+        contact=new Contact(name, phoneNumber, email);
     }
     private static class Contact{
-        String name;
-        int phoneNumber;
-        String email;
-        Contact(String name,int phoneNumber,String email){
-            this.name=name;
-            this.phoneNumber=phoneNumber;
-            this.email=email;
-        }
-        public String getContact(){
-            return "Name : "+name+"\nPhone Number : "+phoneNumber+"\n Email : "+email;
-        }
-        public void setContact(String name,int phoneNumber,String email){
+        private String name;
+        private String phoneNumber;
+        private String email;
+        Contact(String name,String phoneNumber,String email){
             this.name=name;
             this.phoneNumber=phoneNumber;
             this.email=email;
         }
     }
     private static class Address{
-        String street;
-        String city;
-        String state;
+        private String street;
+        private String city;
+        private String state;
         Address(String street,String city,String state){
             this.street=street;
             this.city=city;
             this.state=state;
         }
-        public String getAddress(){
-            return "Street : "+street+"\nCity : "+city+"\nState : "+state;
-        }
-        public void setAddress(String street,String city, String state){
-            this.state=state;
-            this.street=street;
-            this.city=city;
-        }
+    }
+    public String getUser(){
+        return user;
+    }
+    public String getPassword(){
+        return password;
     }
 }
+/*Getters and Setters are provided for every Attribute*/
